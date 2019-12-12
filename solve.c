@@ -6,7 +6,7 @@
 /*   By: skrasin <skrasin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:26:29 by skrasin           #+#    #+#             */
-/*   Updated: 2019/12/12 02:11:34 by skrasin          ###   ########.fr       */
+/*   Updated: 2019/12/12 02:20:46 by skrasin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_create_map(int n)
 	char *map;
 	size_t	l;
 
-	l = n * n * sizeof(char *);
+	l = n * n * sizeof(char);
 	if (!(map = (char *)malloc(l + 1)))
 		return (NULL);
 	map = ft_memset(map, '.', l - 1);
@@ -29,14 +29,15 @@ int		ft_put_tetr(t_tetris node, int n, char *map, char c, int i)
 {
 	int j;
 
-	j = -1;
 	while (map[++i] != '\0')
 	{
+		j = -1;
 		if (map[i] == '.')
 			while (++j < 4)
 				if (node.x[0][j] + i % n > 4 || node.x[1][j] + i / n > 4)
-					break;
-		j = -1;
+					break ;
+		if (j == 4)
+			break ;
 	}
 	if (map[i] == '\0')
 		return (0);
