@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:45:32 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/11 23:37:15 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/12 02:32:14 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ int main(int argc, char **argv)
 		close(fd);
 		int i = 0;
 		printf("Total figure # %d\n", n);
-		while (tab)
-		{
-			i++;
-			printf("figure # %d\nx -> [%d, %d, %d, %d]\ny -> [%d, %d, %d, %d]\n\n", i, tab->x[0][0], tab->x[0][1], tab->x[0][2], tab->x[0][3] , tab->x[1][0], tab->x[1][1], tab->x[1][2], tab->x[1][3]);
-			tab = tab->next;
-		}
-		tab = NULL;
-		//ft_solve(tab, n);
+		// while (tab)
+		// {
+		// 	i++;
+		// 	printf("figure # %d\nx -> [%d, %d, %d, %d]\ny -> [%d, %d, %d, %d]\n\n", i, tab->x[0][0], tab->x[0][1], tab->x[0][2], tab->x[0][3] , tab->x[1][0], tab->x[1][1], tab->x[1][2], tab->x[1][3]);
+		// 	tab = tab->next;
+		// }
+		// tab = NULL;
+		ft_solve(tab, ft_isqrtc(n * 4));
 		//tab_clear(*tab);
 	}
     // else

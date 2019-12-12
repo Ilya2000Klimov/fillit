@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrasin <skrasin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:26:29 by skrasin           #+#    #+#             */
-/*   Updated: 2019/12/12 02:20:46 by skrasin          ###   ########.fr       */
+/*   Updated: 2019/12/12 02:36:06 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		ft_put_tetr(t_tetris node, int n, char *map, char c, int i)
 	}
 	if (map[i] == '\0')
 		return (0);
+	j = -1;
 	while (++j < 4)
 		map[i + node.x[0][j] + n * node.x[1][j]] = c;
 	return (i);

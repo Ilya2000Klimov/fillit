@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:14:33 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/11 23:33:36 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/12 02:32:47 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	validate(char *buff, int bytesread, t_tetris *tab)
 		if ((i % 5 < 4 && (buff[i] == '.' || buff[i] == '#')) || (i == 20 && buff[i] == '\n'))
 		{
 			if (buff[i] == '#')
-				if (!tetr_add(tab, i) && ++num)
+				if (++num && !tetr_add(tab, i))
 					return (0);
 			i++;
 		}
