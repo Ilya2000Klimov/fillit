@@ -6,7 +6,7 @@
 /*   By: skrasin <skrasin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:26:29 by skrasin           #+#    #+#             */
-/*   Updated: 2019/12/12 02:04:04 by skrasin          ###   ########.fr       */
+/*   Updated: 2019/12/12 02:11:34 by skrasin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_create_map(int n)
 	size_t	l;
 
 	l = n * n * sizeof(char *);
-	if (!(map = (char *)ft_memalloc(l)))
+	if (!(map = (char *)malloc(l + 1)))
 		return (NULL);
 	map = ft_memset(map, '.', l - 1);
 	map[l] = '\0';
@@ -54,9 +54,17 @@ void	ft_free_c(char *map, t_tetris node, int i, int n) //write ft_mapsetchar()
 		map[i + node.x[0][j] + n * node.x[1][j]] = '.';
 }
 
-int		ft_print_map(char *map)
+int		ft_print_map(char *map, int n)
 {
-	ft_putstr(map);
+	int i;
+
+	i = 0;
+	while(map[i] != '\0')
+	{
+		write(1, &map[i], n);
+		write(1, "\n", 1);
+		i += n;
+	}
 	return (1);
 }
 
@@ -68,7 +76,7 @@ int		ft_backtrack(char *map, t_tetris *node, int n, char c)
 	i = -1;
 	l = n * n;
 	if (node == NULL)
-		return(ft_print_map(map)); //print
+		return(ft_print_map(map, n)); //print
 	if (ft_put_tetr(*node, n, map, c, i))
 		while (!ft_backtrack(map, node->next, n, ++c) && i < l)
 		{
