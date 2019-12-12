@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:14:33 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/12 02:32:47 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/12 11:45:55 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,29 @@ t_tetris	*new_tetr(t_tetris **tab)
 	return (tail);
 }
 
+void ft_move(t_tetris *tab)
+{
+	int minx;
+	int miny;
+	int i;
+
+	minx = tab->x[0][0];
+	miny = tab->x[1][0];
+	i = 0;
+	while (++i < 4)
+	{
+		if (tab->x[0][i] < minx)
+			minx = tab->x[0][i];
+		if (tab->x[1][i] < miny)
+			miny = tab->x[1][i];
+	}
+	while (--i > -1)
+	{
+		tab->x[0][i] -= minx;
+		tab->x[1][i] -= miny;
+	}
+}
+
 int tetr_add(t_tetris *tab, int n)
 {
 	int i;
@@ -66,6 +89,7 @@ int tetr_add(t_tetris *tab, int n)
 		}
 		if (connection != 6 && connection != 8)
 			return (0);
+		ft_move(tab);
 	}
 	return (1);
 }
