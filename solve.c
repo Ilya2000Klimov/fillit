@@ -6,7 +6,7 @@
 /*   By: skrasin <skrasin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:26:29 by skrasin           #+#    #+#             */
-/*   Updated: 2019/12/12 01:44:12 by skrasin          ###   ########.fr       */
+/*   Updated: 2019/12/12 02:04:04 by skrasin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ void	ft_free_c(char *map, t_tetris node, int i, int n) //write ft_mapsetchar()
 		map[i + node.x[0][j] + n * node.x[1][j]] = '.';
 }
 
+int		ft_print_map(char *map)
+{
+	ft_putstr(map);
+	return (1);
+}
+
 int		ft_backtrack(char *map, t_tetris *node, int n, char c)
 {
 	int i;
@@ -62,7 +68,7 @@ int		ft_backtrack(char *map, t_tetris *node, int n, char c)
 	i = -1;
 	l = n * n;
 	if (node == NULL)
-		return(1); //print
+		return(ft_print_map(map)); //print
 	if (ft_put_tetr(*node, n, map, c, i))
 		while (!ft_backtrack(map, node->next, n, ++c) && i < l)
 		{
