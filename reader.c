@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:14:33 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/12 20:14:08 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/12 20:35:27 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 t_tetris	*new_tetr(t_tetris **tab)
 {
 	int				j;
-	int static		count = 0;
-	t_tetris static	*tail = NULL;
+	static int		count = 0;
+	static t_tetris	*tail = NULL;
 	t_tetris		*new;
 
-	new = malloc(sizeof(t_tetris));
-	if (!*tab || !tail)
+	new = (t_tetris*)malloc(sizeof(t_tetris));
+	if (!tab || !*tab || !tail)
 	{
 		tail = new;
 		*tab = new;
