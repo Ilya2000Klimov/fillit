@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:14:33 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/12 11:45:55 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/12 20:14:08 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 t_tetris	*new_tetr(t_tetris **tab)
 {
-	int i;
-	int j;
-	t_tetris static *tail = NULL;
-	t_tetris *new;
+	int				j;
+	int static		count = 0;
+	t_tetris static	*tail = NULL;
+	t_tetris		*new;
 
 	new = malloc(sizeof(t_tetris));
 	if (!*tab || !tail)
@@ -34,13 +34,15 @@ t_tetris	*new_tetr(t_tetris **tab)
 	tail->next = NULL;
 	j = -1;
 	while (++j < 4)
+	{
 		tail->x[0][j] = -1;
-	while (--j > -1)
 		tail->x[1][j] = -1;
+	}
+	tail->n = count++;
 	return (tail);
 }
 
-void ft_move(t_tetris *tab)
+int			ft_move(t_tetris *tab)
 {
 	int minx;
 	int miny;
@@ -61,21 +63,21 @@ void ft_move(t_tetris *tab)
 		tab->x[0][i] -= minx;
 		tab->x[1][i] -= miny;
 	}
+	return (1);
 }
 
-int tetr_add(t_tetris *tab, int n)
+int			tetr_add(t_tetris *t, int n)
 {
 	int i;
 	int j;
 	int connection;
 
 	i = 0;
-	while(tab->x[0][i] != -1)
-		i++;
-	if (i > 3)
-		return (0);
-	tab->x[0][i] = n % 5;
-	tab->x[1][i] = n / 5;
+	while (t->x[0][i] != -1 && i > -1)
+		if (i++ > 3)
+			return (0);
+	t->x[0][i] = n % 5;
+	t->x[1][i] = n / 5;
 	if (i == 3)
 	{
 		connection = 0;
@@ -84,17 +86,16 @@ int tetr_add(t_tetris *tab, int n)
 		{
 			j = -1;
 			while (++j < 4)
-				if ((((tab->x[0][i] == tab->x[0][j]) != (tab->x[1][i] == tab->x[1][j])) && ((tab->x[0][i] - tab->x[0][j] == -1 || tab->x[0][i] - tab->x[0][j] == 1) || (tab->x[1][i] - tab->x[1][j] == -1 || tab->x[1][i] - tab->x[1][j] == 1))))
+				if ((ft_abs(t->x[0][i] - t->x[0][j]) == 1) !=
+						(ft_abs(t->x[1][i] - t->x[1][j]) == 1))
 					connection++;
 		}
-		if (connection != 6 && connection != 8)
-			return (0);
-		ft_move(tab);
+		return ((connection != 6 && connection != 8) ? 0 : ft_move(t));
 	}
 	return (1);
 }
 
-int	validate(char *buff, int bytesread, t_tetris *tab)
+int			validate(char *buff, int bytesread, t_tetris *tab)
 {
 	int i;
 	int num;
@@ -103,7 +104,8 @@ int	validate(char *buff, int bytesread, t_tetris *tab)
 	num = 0;
 	while (i < bytesread && buff[i] != '\0')
 	{
-		if ((i % 5 < 4 && (buff[i] == '.' || buff[i] == '#')) || (i == 20 && buff[i] == '\n'))
+		if ((i % 5 < 4 && (buff[i] == '.' || buff[i] == '#')) ||
+									(i == 20 && buff[i] == '\n'))
 		{
 			if (buff[i] == '#')
 				if (++num && !tetr_add(tab, i))
@@ -120,36 +122,14 @@ int	validate(char *buff, int bytesread, t_tetris *tab)
 	return (1);
 }
 
-void list_dell(t_tetris **tab)
+void		list_dell(t_tetris **tab)
 {
 	t_tetris *temp;
+
 	while (tab && *tab)
 	{
 		temp = (**tab).next;
 		free(*tab);
 		*tab = temp;
 	}
-}
-
-t_tetris	*reader(int fd, int *n)
-{
-	int			bytesread = 21;
-	char		buff[22];
-	t_tetris	*tab;
-	t_tetris	*tail;
-
-	tab = NULL;
-	while(bytesread == 21)
-	{
-		bytesread = read(fd, buff, 21);
-		buff[bytesread] = '\0';
-		tail = new_tetr(&tab);
-		if ((++(*n)) && validate(buff, bytesread, tail) == 0)
-		{
-			error(1);
-			list_dell(&tab);
-			break;
-		}
-	}
-	return (tab);
 }

@@ -6,43 +6,60 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:45:32 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/12 12:02:49 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/12 20:04:30 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <fcntl.h>
 
-int main(int argc, char **argv)
+t_tetris	*reader(int fd, int *n)
 {
-    int			fd;
+	int			bytesread;
+	char		buff[22];
+	t_tetris	*tab;
+	t_tetris	*tail;
+
+	tab = NULL;
+	bytesread = 21;
+	while (bytesread == 21)
+	{
+		bytesread = read(fd, buff, 21);
+		buff[bytesread] = '\0';
+		tail = new_tetr(&tab);
+		if ((++(*n)) && validate(buff, bytesread, tail) == 0)
+		{
+			error(1);
+			list_dell(&tab);
+			break ;
+		}
+	}
+	return (tab);
+}
+
+void		ft_solve(t_tetris *node, int n)
+{
+	while (!ft_backtrack(ft_create_map(n), node, n))
+		n++;
+}
+
+int			main(int argc, char **argv)
+{
+	int			fd;
 	int			n;
 	t_tetris	*tab;
 
-	while(argc-- > 1)
+	if (argc == 2)
 	{
-		printf("argc = %d\n", argc);
-		printf("argv = %s\n\n", argv[argc]);
-		if((fd = open(argv[argc], O_RDONLY)) == -1)
+		if ((fd = open(argv[1], O_RDONLY)) == -1)
 			error(2);
 		n = 0;
 		tab = reader(fd, &n);
 		if (n > 26)
 			error(1);
 		close(fd);
-		int i = 0;
-		printf("Total figure # %d\n", n);
-		// while (tab)
-		// {
-		// 	i++;
-		// 	printf("figure # %d\nx -> [%d, %d, %d, %d]\ny -> [%d, %d, %d, %d]\n\n", i, tab->x[0][0], tab->x[0][1], tab->x[0][2], tab->x[0][3] , tab->x[1][0], tab->x[1][1], tab->x[1][2], tab->x[1][3]);
-		// 	tab = tab->next;
-		// }
-		// tab = NULL;
 		ft_solve(tab, ft_isqrtc(n * 4));
-		//tab_clear(*tab);
+		list_dell(&tab);
 	}
-    // else
-    //     error(1);
 	return (0);
 }

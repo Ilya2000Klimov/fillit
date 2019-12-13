@@ -6,15 +6,11 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 20:27:23 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/12 01:50:05 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/12 20:05:47 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-/*  
-//	integer squareroot floor
-*/  
 
 unsigned int	ft_isqrtc(int n)
 {
