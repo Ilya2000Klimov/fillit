@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:26:29 by skrasin           #+#    #+#             */
-/*   Updated: 2019/12/12 20:00:27 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/14 11:21:37 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		ft_print_map(char *map, int n)
 		write(1, "\n", 1);
 		i += n;
 	}
+	free(map);
 	return (1);
 }
 

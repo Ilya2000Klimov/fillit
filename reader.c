@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:14:33 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/13 12:45:50 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/14 11:22:30 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int			tetr_add(t_tetris *t, int n)
 		{
 			j = -1;
 			while (++j < 4)
-				if ((ft_abs(t->x[0][i] - t->x[0][j]) == 1) !=
-						(ft_abs(t->x[1][i] - t->x[1][j]) == 1))
+				if (ft_abs(t->x[0][i] - t->x[0][j])
+				+ ft_abs(t->x[1][i] - t->x[1][j]) == 1)
 					connection++;
 		}
 		return ((connection != 6 && connection != 8) ? 0 : ft_move(t));

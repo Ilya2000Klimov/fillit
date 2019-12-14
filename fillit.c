@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:45:32 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/13 15:51:05 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/14 11:28:00 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,14 @@ t_tetris	*reader(int fd, int *n)
 
 void		ft_solve(t_tetris *node, int n)
 {
-	while (!ft_backtrack(ft_create_map(n), node, n))
-		n++;
+	char *map;
+
+	map = ft_create_map(n);
+	while (!ft_backtrack(map, node, n))
+	{
+		free(map);
+		map = ft_create_map(++n);
+	}
 }
 
 int			main(int argc, char **argv)
@@ -67,6 +73,5 @@ int			main(int argc, char **argv)
 	}
 	else
 		error(1);
-	
 	return (0);
 }

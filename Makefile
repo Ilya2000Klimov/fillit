@@ -6,7 +6,7 @@
 #    By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 18:14:59 by iklimov           #+#    #+#              #
-#    Updated: 2019/12/13 16:37:31 by iklimov          ###   ########.fr        #
+#    Updated: 2019/12/14 10:43:23 by iklimov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,13 @@ LIB = libft/libft.a
 
 all: $(NAME)
 
-
 $(NAME):
 	@make -s -C libft
 	@gcc $(CFLG) $(SRCS) $(LIB) -o $(NAME)
+
+debug:
+	@make -s -C libft
+	@gcc -g $(CFLG) $(SRCS) $(LIB) -o $(NAME)
 
 clean:
 	@make -C libft clean
