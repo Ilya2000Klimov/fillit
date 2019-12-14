@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_isqrtc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 17:17:43 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/13 12:45:47 by iklimov          ###   ########.fr       */
+/*   Created: 2019/11/14 20:27:23 by iklimov           #+#    #+#             */
+/*   Updated: 2019/12/12 17:46:49 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	error(int i)
+/*  
+//	integer squareroot floor
+*/  
+
+unsigned int	ft_isqrtc(int n)
 {
-	char const		*err_msg[3] = {"Nothing wrong\n",
-							"usage:\t./fillit\tsource_file\n", "error\n"};
+	int x;
+	int y;
 
-	ft_putstr(err_msg[i]);
+	y = 1;
+	x = n;
+	while (x > y)
+	{
+		x = (x + y) / 2;
+		y = n / x;
+	}
+	if (x * x != n)
+		x++;
+	return (x);
 }

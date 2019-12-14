@@ -6,14 +6,14 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:48:40 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/12 19:55:07 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:51:25 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
 # include "libft/libft.h"
-#include <stdio.h>
+# include <stdio.h>
 
 typedef struct		s_tetris
 {

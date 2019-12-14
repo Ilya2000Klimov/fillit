@@ -6,7 +6,7 @@
 #    By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/23 20:46:39 by iklimov           #+#    #+#              #
-#    Updated: 2019/11/01 18:04:55 by iklimov          ###   ########.fr        #
+#    Updated: 2019/12/12 17:48:54 by iklimov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,9 @@ MATHSRC =	ft_atoi.c \
 			ft_itoa.c \
 			ft_intlength.c \
 			ft_intsqrt.c \
+			ft_abs.c \
+			ft_isqrtc.c \
+			ft_isqrtf.c \
 
 PUTSRC =	ft_putchar.c \
 			ft_putstr.c \

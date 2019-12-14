@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 17:17:43 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/13 12:45:47 by iklimov          ###   ########.fr       */
+/*   Created: 2019/12/12 17:38:34 by iklimov           #+#    #+#             */
+/*   Updated: 2019/12/12 20:30:01 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	error(int i)
+int	ft_abs(int i)
 {
-	char const		*err_msg[3] = {"Nothing wrong\n",
-							"usage:\t./fillit\tsource_file\n", "error\n"};
-
-	ft_putstr(err_msg[i]);
+	int const mask = i >> (sizeof(int) * 8 - 1);
+	return ((i + mask) ^ mask);
 }

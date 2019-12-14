@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 17:03:07 by iklimov           #+#    #+#             */
-/*   Updated: 2019/11/01 18:33:32 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/12 17:50:11 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,8 @@ int				ft_atoi_base(char *str, char *base);
 char			*ft_itoa_base(int value, char *base);
 int				ft_intlength(int n);
 int				ft_atoi(const char *str);
+unsigned int	ft_isqrtf(int n);
+unsigned int	ft_isqrtc(int n);
+int				ft_abs(int i);
 
 #endif

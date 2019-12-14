@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:45:32 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/12 20:04:30 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:51:05 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ t_tetris	*reader(int fd, int *n)
 		tail = new_tetr(&tab);
 		if ((++(*n)) && validate(buff, bytesread, tail) == 0)
 		{
-			error(1);
 			list_dell(&tab);
-			break ;
+			return (NULL);
 		}
 	}
 	return (tab);
@@ -55,11 +54,19 @@ int			main(int argc, char **argv)
 			error(2);
 		n = 0;
 		tab = reader(fd, &n);
-		if (n > 26)
-			error(1);
-		close(fd);
-		ft_solve(tab, ft_isqrtc(n * 4));
-		list_dell(&tab);
+		if (tab)
+		{
+			if (n > 26)
+				error(2);
+			close(fd);
+			ft_solve(tab, ft_isqrtc(n * 4));
+			list_dell(&tab);
+		}
+		else
+			error(2);
 	}
+	else
+		error(1);
+	
 	return (0);
 }
