@@ -6,7 +6,7 @@
 /*   By: iklimov <iklimov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:45:32 by iklimov           #+#    #+#             */
-/*   Updated: 2019/12/14 11:28:00 by iklimov          ###   ########.fr       */
+/*   Updated: 2019/12/17 18:25:09 by iklimov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ int			main(int argc, char **argv)
 			error(2);
 		n = 0;
 		tab = reader(fd, &n);
-		if (tab)
+		if (tab && n < 27)
 		{
-			if (n > 26)
-				error(2);
 			close(fd);
 			ft_solve(tab, ft_isqrtc(n * 4));
 			list_dell(&tab);
